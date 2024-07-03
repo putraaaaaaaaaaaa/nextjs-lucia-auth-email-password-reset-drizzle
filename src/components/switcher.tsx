@@ -1,27 +1,10 @@
 'use client';
 
 import { Menu } from '@headlessui/react';
-import { Fragment, useTransition } from 'react';
+import { useTransition } from 'react';
 import { useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { HiOutlineChevronDown } from 'react-icons/hi';
 import { FlagImage } from 'react-international-phone';
-
-const flags = {
-  en: (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20">
-      <path fill="#F5F5F5" d="M5 4H43C45.2091 4 47 5.79086 47 8V40C47 42.2091 45.2091 44 43 44H5C2.79086 44 1 42.2091 1 40V8C1 5.79086 2.79086 4 5 4Z"/>
-      <path fill="#41479B" d="M19.542 4.115v19.771H47v-4.603H24.146V4.115zM1 24.115V28.72h22.854v15.165H1V24.115zm17.771 4.604V43.885H5.229V28.72h13.542zM29.771 28.72H47v15.165H29.771V28.72z"/>
-      <path fill="#FF4B55" d="M24 27.345L11.885 44H5.229L18.344 27.345H24zm3.885-3.23L47 27.345v-4.603L27.885 17.115H24v7zM1 24.115h4.604V44H1V24.115zm17.771 4.604h-4.604v19.771h4.604V28.72zm23.542 4.604V44H24v-4.604h18.313V33.323z"/>
-    </svg>
-  ),
-  id: (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20">
-      <path fill="#D80027" d="M24 24H0V0h48v24z"/>
-      <path fill="#F0F0F0" d="M24 24H0v24h48V24z"/>
-    </svg>
-  )
-};
 
 const languages = [
   

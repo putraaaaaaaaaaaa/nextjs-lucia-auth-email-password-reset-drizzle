@@ -1,8 +1,4 @@
 import { type Metadata } from "next";
-import {
-  NextjsLight,
-  NextjsDark,
-} from "./_components/feature-icons";
 import { Banner } from "./_components/banner";
 export const metadata: Metadata = {
   title: "Next.js Lucia Auth Starter Template",
@@ -16,7 +12,6 @@ const HomePage = () => {
       <main className="relative bg-gradient-theme">
         <Banner />
         <div className="flex flex-col gap-y-8 pt-8">
-          
         </div>
       </main>
     </>
@@ -24,12 +19,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-function NextjsIcon({ className }: { className?: string }) {
-  return (
-    <>
-      <NextjsLight className={className + " dark:hidden"} />
-      <NextjsDark className={className + " hidden dark:block"} />
-    </>
-  );
-}

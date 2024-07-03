@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Autoplay } from "swiper";
+import { Autoplay } from "swiper";
 export const Banner = () => {
 
   return (

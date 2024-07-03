@@ -1,9 +1,5 @@
-import { CodeIcon } from "@radix-ui/react-icons";
-import { ThemeToggle } from "@/components/theme-toggle";
 import Link from "next/link";
 import Image from "next/image";
-const githubUrl = "https://github.com/iamtouha/next-lucia-auth";
-const twitterUrl = "https://twitter.com/iamtouha";
 import {useTranslations} from 'next-intl';
 export const Footer = () => {
   const t = useTranslations('Footer');

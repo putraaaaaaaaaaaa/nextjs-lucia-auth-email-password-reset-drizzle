@@ -6,7 +6,7 @@ import {
   DialogPanel,
   DialogBackdrop,
 } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import LocalSwitcher from "@/components/switcher";
