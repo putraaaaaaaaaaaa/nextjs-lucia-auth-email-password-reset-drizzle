@@ -1,71 +1,241 @@
-import Link from "next/link";
-import { RocketIcon } from "@/components/icons";
-import { APP_TITLE } from "@/lib/constants";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+"use client";
 
-const routes = [
-  { name: "Home", href: "/" },
-  { name: "Features", href: "/#features" },
-  {
-    name: "Documentation",
-    href: "https://www.touha.dev/posts/simple-nextjs-t3-authentication-with-lucia",
-  },
-] as const;
+import { Button, Dialog, DialogPanel, DialogBackdrop } from '@headlessui/react';
+import { Fragment, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 
 export const Header = () => {
+  let [isOpen, setIsOpen] = useState(false);
+  function open() {
+    setIsOpen(true);
+  }
+  function close() {
+    setIsOpen(false);
+  }
   return (
-    <header className="px-2 py-4 lg:py-6">
-      <div className="container flex items-center gap-2 p-0">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+    <nav className="sticky top-0 z-40 w-full flex-none border-b border-border/50 bg-secondary/80 backdrop-blur print:hidden">
+      <div className="container">
+        <div className="flex h-[60px] items-center">
+          <>
             <Button
-              className="focus:outline-none focus:ring-1 md:hidden"
-              size="icon"
-              variant="outline"
+              onClick={open}
+              className="rounded-md bg-secondary p-2 text-foreground lg:hidden"
             >
-              <HamburgerMenuIcon className="h-5 w-5" />
+              <span className="sr-only">Open menu</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                className="h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
             </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="start">
-            <div className="py-1">
-              {routes.map(({ name, href }) => (
-                <DropdownMenuItem key={name} asChild>
-                  <Link href={href}>{name}</Link>
-                </DropdownMenuItem>
-              ))}
-            </div>
-          </DropdownMenuContent>
-        </DropdownMenu>
-        <Link
-          className="flex items-center justify-center text-xl font-medium"
-          href="/"
-        >
-          <RocketIcon className="mr-2 h-5 w-5" /> {APP_TITLE}
-        </Link>
-        <nav className="ml-10 hidden gap-4 sm:gap-6 md:flex">
-          {routes.map(({ name, href }) => (
-            <Link
-              key={name}
-              className="text-sm font-medium text-muted-foreground/70 transition-colors hover:text-muted-foreground"
-              href={href}
-            >
-              {name}
+            <Dialog open={isOpen} as="div" className="relative z-40 lg:hidden" onClose={close}>
+              <DialogBackdrop 
+                transition
+                className="fixed inset-0 bg-background/25 backdrop-blur-sm opacity-100 transition-opacity duration-500 ease-in-out data-[closed]:opacity-0" />
+            
+              <div className="fixed inset-0 z-40 flex">
+                  <DialogPanel
+                    transition
+                    className="relative flex w-full max-w-xs flex-col overflow-y-auto bg-background pb-12 shadow-xl translate-x-0 transition duration-300 ease-in-out data-[closed]:-translate-x-full"
+                  >
+                    <div className="flex flex-row-reverse items-center justify-between border-b border-dashed p-4">
+                      <button
+                        type="button"
+                        className="text-murky-400 -m-2 inline-flex items-center justify-center rounded-md p-2"
+                        onClick={close}
+                      >
+                        <span className="sr-only">Close menu</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          aria-hidden="true"
+                          className="h-6 w-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                      <div className="flex items-center">
+                        <Link className="relative h-10 w-24" href="/" style={{ outline: 'currentColor' }}>
+                          <Image
+                            alt="Logo"
+                            fill
+                            className="object-contain"
+                            src="/util/logo.webp"
+                          />
+                        </Link>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 border-y border-background p-4">
+                      <div>
+                        <Link
+                          className="group flex items-center justify-between rounded-md px-4 py-2 font-medium text-foreground hover:bg-muted"
+                          href="/id"
+                          style={{ outline: 'currentColor' }}
+                        >
+                          <span>Beranda</span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            aria-hidden="true"
+                            className="hidden h-5 w-5 group-hover:block"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </Link>
+                      </div>
+                      <div>
+                        <Link
+                          className="group flex items-center justify-between rounded-md px-4 py-2 font-medium text-foreground hover:bg-muted"
+                          href="/id/invoices"
+                          style={{ outline: 'currentColor' }}
+                        >
+                          <span>Cek Transaksi</span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            aria-hidden="true"
+                            className="hidden h-5 w-5 group-hover:block"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </Link>
+                      </div>
+                      <div>
+                        <Link
+                          className="group flex items-center justify-between rounded-md px-4 py-2 font-medium text-foreground hover:bg-muted"
+                          href="/id/leaderboard"
+                          style={{ outline: 'currentColor' }}
+                        >
+                          <span>Leaderboard</span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            aria-hidden="true"
+                            className="hidden h-5 w-5 group-hover:block"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
+                            />
+                          </svg>
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="space-y-2 p-4">
+                      <div>
+                        <Link
+                          className="group flex items-center justify-between rounded-md px-4 py-2 font-medium text-foreground hover:bg-muted"
+                          href="/login"
+                          style={{ outline: 'currentColor' }}
+                        >
+                          <span>Masuk</span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            aria-hidden="true"
+                            className="hidden h-5 w-5 group-hover:block"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </Link>
+                      </div>
+                      <div>
+                        <Link
+                          className="group flex items-center justify-between rounded-md px-4 py-2 font-medium text-foreground hover:bg-muted"
+                          href="/signup"
+                          style={{ outline: 'currentColor' }}
+                        >
+                          <span>Daftar</span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            aria-hidden="true"
+                            className="hidden h-5 w-5 group-hover:block"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </Link>
+                      </div>
+                    </div>
+
+                  </DialogPanel>
+              </div>
+            </Dialog>
+          </>
+          <div className="ml-3 mr-2 flex items-center lg:ml-0">
+            <Link href="/">
+              <Image
+                alt="Logo"
+                width={150}
+                height={43}
+                className="h-8 w-auto"
+                src="/util/logo.webp"
+              />
             </Link>
-          ))}
-        </nav>
-        <div className="ml-auto">
-          <Button asChild variant={"secondary"}>
-            <Link href="/login">Login</Link>
-          </Button>
+          </div>
+          <div className="hidden lg:ml-10 lg:block lg:self-stretch">
+            <div className="flex h-full space-x-6">
+              <Link
+                className="relative z-10 -mb-px flex items-center space-x-2 border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out border-primary-500 text-primary-500"
+                href="/"
+                style={{ outline: "currentcolor" }}
+              >
+                <span>Beranda</span>
+              </Link>
+            </div>
+          </div>
+          <div className="ml-auto flex h-full items-center space-x-2 lg:space-x-6">
+            <div className="flex flex-row-reverse items-center gap-x-2">
+              <div className="relative inline-block text-left">
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </header>
+    </nav>
   );
 };

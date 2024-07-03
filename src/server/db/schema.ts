@@ -7,8 +7,12 @@ import {
   text,
   timestamp,
   varchar,
+  pgSchema,
+  pgTable,
 } from "drizzle-orm/pg-core";
 import { DATABASE_PREFIX as prefix } from "@/lib/constants";
+
+
 
 export const pgTable = pgTableCreator((name) => `${prefix}_${name}`);
 
@@ -95,6 +99,27 @@ export const posts = pgTable(
     userIdx: index("post_user_idx").on(t.userId),
     createdAtIdx: index("post_created_at_idx").on(t.createdAt),
   }),
+);
+
+export const kategori = pgTable(
+  "kategori",
+  {
+    id: varchar("id", { length: 15 }).primaryKey(),
+    name: varchar("title", { length: 255 }).notNull(),
+    sub_name: varchar("sub_name", { length: 255 }).notNull(),
+    url: varchar("url", { length: 255 }).notNull(),
+    description: varchar("description", { length: 255 }).notNull(),
+    image: varchar("image", { length: 255 }).notNull(),
+    banner: varchar("bannee", { length: 255 }).notNull(),
+    status: varchar("status", { length: 10, enum: ["private", "public"] })
+      .default("public")
+      .notNull(),
+    populer: varchar("populer", { length: 10, enum: ["no", "yes"] })
+    .default("no")
+    .notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at", { mode: "date" }).$onUpdate(() => new Date()),
+  },
 );
 
 export const postRelations = relations(posts, ({ one }) => ({

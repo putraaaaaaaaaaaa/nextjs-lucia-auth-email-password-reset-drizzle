@@ -1,6 +1,6 @@
-export const APP_TITLE = "Acme";
-export const DATABASE_PREFIX = "acme";
-export const EMAIL_SENDER = '"Acme" <noreply@acme.com>';
+export const APP_TITLE = "NUEPEDIA";
+export const DATABASE_PREFIX = "nekoproject";
+export const EMAIL_SENDER = '"Nuepedia" <noreply@nuepedia.com>';
 
 export enum Paths {
   Home = "/",
