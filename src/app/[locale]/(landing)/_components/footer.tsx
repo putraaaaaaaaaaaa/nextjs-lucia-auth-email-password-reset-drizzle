@@ -4,8 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 const githubUrl = "https://github.com/iamtouha/next-lucia-auth";
 const twitterUrl = "https://twitter.com/iamtouha";
-
+import {useTranslations} from 'next-intl';
 export const Footer = () => {
+  const t = useTranslations('Footer');
+  const s = useTranslations('Sub');
   return (
     <div>
       <svg
@@ -57,10 +59,7 @@ export const Footer = () => {
               src="/util/logo.webp"
             />
             <p className="text-sm leading-6 text-foreground">
-              NUE PEDIA adalah tempat top up games yang aman, murah dan
-              terpercaya. Proses cepat 1-3 Detik. Open 24 jam. Payment
-              terlengkap. Jika ada kendala silahkan klik logo CS pada kanan
-              bawah di website ini.
+              {t('title')}
             </p>
             <div className="flex space-x-6">
               <Link
@@ -75,7 +74,7 @@ export const Footer = () => {
           <div className="mt-16 grid grid-cols-2 gap-8 md:grid-cols-4 xl:col-span-2">
             <div>
               <h3 className="text-sm font-semibold leading-6 text-primary">
-                Kemitraan
+                 {t('partner')}
               </h3>
               <ul role="list" className="mt-6 space-y-4">
                 <li>
@@ -91,7 +90,7 @@ export const Footer = () => {
             </div>
             <div>
               <h3 className="text-sm font-semibold leading-6 text-primary">
-                Peta Situs
+                {t('sitemap')}
               </h3>
               <ul role="list" className="mt-6 space-y-4">
                 <li>
@@ -100,7 +99,7 @@ export const Footer = () => {
                     className="flex items-center gap-2 text-sm leading-6 text-foreground hover:text-primary/75"
                     style={{ outline: "currentcolor" }}
                   >
-                    <span>Beranda</span>
+                    <span>{s('home')}</span>
                   </Link>
                 </li>
                 <li>
@@ -109,7 +108,7 @@ export const Footer = () => {
                     className="flex items-center gap-2 text-sm leading-6 text-foreground hover:text-primary/75"
                     style={{ outline: "currentcolor" }}
                   >
-                    <span>Masuk</span>
+                    <span>{s('login')}</span>
                   </Link>
                 </li>
                 <li>
@@ -118,7 +117,7 @@ export const Footer = () => {
                     className="flex items-center gap-2 text-sm leading-6 text-foreground hover:text-primary/75"
                     style={{ outline: "currentcolor" }}
                   >
-                    <span>Daftar</span>
+                    <span>{s('regis')}</span>
                   </Link>
                 </li>
                 <li>
@@ -127,14 +126,14 @@ export const Footer = () => {
                     className="flex items-center gap-2 text-sm leading-6 text-foreground hover:text-primary/75"
                     style={{ outline: "currentcolor" }}
                   >
-                    <span>Cek Transaksi</span>
+                    <span>{s('invoice')}</span>
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
               <h3 className="text-sm font-semibold leading-6 text-primary">
-                Dukungan
+                {t('support')}
               </h3>
               <ul role="list" className="mt-6 space-y-4">
                 <li>
@@ -168,7 +167,7 @@ export const Footer = () => {
             </div>
             <div>
               <h3 className="text-sm font-semibold leading-6 text-primary">
-                Legalitas
+                {t('legal')}
               </h3>
               <ul role="list" className="mt-6 space-y-4">
                 <li>
@@ -177,7 +176,7 @@ export const Footer = () => {
                     className="flex items-center gap-2 text-sm leading-6 text-foreground hover:text-primary/75"
                     style={{ outline: "currentcolor" }}
                   >
-                    <span>Kebijakan Pribadi</span>
+                    <span>{s('privacy')}</span>
                   </Link>
                 </li>
                 <li>
@@ -186,7 +185,7 @@ export const Footer = () => {
                     className="flex items-center gap-2 text-sm leading-6 text-foreground hover:text-primary/75"
                     style={{ outline: "currentcolor" }}
                   >
-                    <span>Syarat & Ketentuan</span>
+                    <span>{s('sk')}</span>
                   </Link>
                 </li>
               </ul>
@@ -195,7 +194,7 @@ export const Footer = () => {
         </div>
         <div className="mt-16 flex items-center justify-between border-t border-background/50 pt-8 sm:mt-20 lg:mt-24">
           <p className="text-xs leading-5 text-foreground">
-            © 2024 CV NUEPEDIA. All rights reserved.
+            © Copyright 2024 CV NUEPEDIA.
           </p>
         </div>
       </div>

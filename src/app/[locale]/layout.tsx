@@ -8,6 +8,8 @@ import { fontSans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import { TRPCReactProvider } from "@/trpc/react";
 import type { Metadata, Viewport } from "next";
+import {NextIntlClientProvider} from 'next-intl';
+import {getMessages} from 'next-intl/server';
 
 export const metadata: Metadata = {
   title: {
@@ -29,13 +31,16 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+    params: {locale}
 }: {
   children: React.ReactNode;
+  params: {locale: string};
 }) {
+  const messages = await getMessages();
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={cn(
           "bg-background bg-gradient-theme text-foreground font-sans antialiased",
@@ -48,7 +53,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <TRPCReactProvider>{children}</TRPCReactProvider>
+          <TRPCReactProvider>
+            <NextIntlClientProvider messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+          </TRPCReactProvider>
           <Toaster />
         </ThemeProvider>
       </body>
